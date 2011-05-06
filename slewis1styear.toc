@@ -1,0 +1,18 @@
+\contentsline {section}{\numberline {1}Introduction}{3}
+\contentsline {section}{\numberline {2}Background}{3}
+\contentsline {subsection}{\numberline {2.1}Baryon Spectroscopy and Spin Observables}{3}
+\contentsline {subsection}{\numberline {2.2}CLAS at Jefferson Lab}{4}
+\contentsline {subsection}{\numberline {2.3}Nested Sampling}{4}
+\contentsline {section}{\numberline {3}Nested Sampling}{8}
+\contentsline {subsection}{\numberline {3.1}The Lighthouse Problem}{8}
+\contentsline {subsection}{\numberline {3.2}Applications to Baryon Spectroscopy}{11}
+\contentsline {subsubsection}{\numberline {3.2.1}Evolved Prior}{11}
+\contentsline {section}{\numberline {4}Analysis Program}{12}
+\contentsline {subsection}{\numberline {4.1}SCons}{12}
+\contentsline {subsection}{\numberline {4.2}Structure and Coding}{12}
+\contentsline {subsection}{\numberline {4.3}Output}{13}
+\contentsline {subsection}{\numberline {4.4}Performance Testing}{14}
+\contentsline {subsubsection}{\numberline {4.4.1}Event Generator}{14}
+\contentsline {subsubsection}{\numberline {4.4.2}Timing Tests}{14}
+\contentsline {section}{\numberline {5}Conclusions}{14}
+\contentsline {section}{\numberline {6}Future Work}{15}
