@@ -2,7 +2,7 @@
 \contentsline {section}{\numberline {2}Background}{3}
 \contentsline {subsection}{\numberline {2.1}Baryon Spectroscopy and Spin Observables}{3}
 \contentsline {subsection}{\numberline {2.2}CLAS at Jefferson Lab}{4}
-\contentsline {subsection}{\numberline {2.3}Nested Sampling}{4}
+\contentsline {subsection}{\numberline {2.3}Nested Sampling}{5}
 \contentsline {section}{\numberline {3}Nested Sampling}{8}
 \contentsline {subsection}{\numberline {3.1}The Lighthouse Problem}{8}
 \contentsline {subsection}{\numberline {3.2}Applications to Baryon Spectroscopy}{11}
