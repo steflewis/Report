@@ -80,8 +80,10 @@ In addition to becoming accustomed to the computational skills, there has been s
 \section{Background}
 \subsection{Baryon Spectroscopy and Spin Observables} 
 %Baryon paper - Klempt, Richard
-Despite the physics taught in undergraduate physics courses, it is not well understood how the
-
+Despite the physics taught in undergraduate physics courses, the quark contributions to the spin of a nucleon are not well understood.  There exist several quark models which each attempt to provide an explanation of the spin nature of nucleons.  Baryon spectroscopy is an experimental approach used to support or preclude predicted quark models.  Each quark model predicts mass resonances at various energies in the nucleon spectrum.  There are some mass resonances, however, that are expected for some quark models and not others.  Finding these resonances that are missing from some quark models would exclude those models and provide a significant insight into the spin structure of the nucleon.
+\newline
+Pseudoscalar meson photoproduction is used to examine the spectrum of excited nucleon states.  It can be said that the entire process of pseudoscalar meson photoproduction can be completely described by four complex amplitudes.  A beam of high-energy photons is directed onto a stationary nucleon target.  Mesons and the scattered nucleon are detected at points within the detector.  From the information detected, it is possible to extract various observables that can be linked to these four complex amplitudes.  There are, in total, fifteen observables (described in Table I) that can be extracted from variations in experimental set-up.  There are three single-spin observables - a photon-beam asymmetry ($B$), a recoil polarisation ($R$) and a target polarisation ($T$).  There are four beam-recoil ($BR$), four beam-target ($BT$) and four recoil-target ($RT$) spin polarisations.  These observables are all non-independent combinations of the four complex amplitudes.  As such, it is necessary to calculate multiple observables in order to extract the amplitudes. Data from suitably arranged experiments must be used to calculate these observables. 
+\newline
 %%%%This is from the Spin Observables section (which used to exist).  ABOVE HERE need to explain physics.
 In order to become accustomed with the correlations and behaviour of spin observables, a small standalone program was created.  The aim of this macro was to generate dummy variables used to calculate the sixteen spin observables and output plots showing correlations between various observables.
 \newline
@@ -147,8 +149,12 @@ The equations defining the thirteen tetrahedra are shown below.
 
 The significance of these thirteen triples is still being explored.
 
-\subsection{CLAS at Jefferson Lab}
-The CEBAF Large Acceptance Spectrometer (CLAS) Collaboration is based in Hall B of Jefferson Lab.  
+\subsection{N* and CLAS at Jefferson Lab}
+The CEBAF Large Acceptance Spectrometer (CLAS) Collaboration is based in Hall B of the Thomas Jefferson National Accelerator Facility (Jefferson Lab).  The CLAS detector has been used in many experiments.  Particularly relevant to this work is the N* (excited nucleon) program at CLAS.  This program uses pseudoscalar meson photoproduction in order to explore the quark structure of nucleons.  The specific reaction used in this work is described by the following equation:
+\begin{equation}
+ \gamma p \rightarrow \pi^{+} \pi^{-} p
+\end{equation}
+A high energy photon beam is incident on a stationary proton target.  The resulting pi mesons and the scattered proton hit the detector, which records values such as energy, position along detector and timing.  This information is then used to calculate more useful physical quantities, including mass, momentum and angular momentum distributions.  
 
 \subsection{Nested Sampling}
 %Sivia, Skilling
@@ -288,7 +294,7 @@ It was apparent from these plots that the two versions of the code were consiste
 Once a working version of the generic object-oriented nested sampling program was achieved, it was applied to a more physics-related problem.  The first task in this physics application was to extract the value of one observable - the photon-beam asymmetry, B (defined in Table I). An event generator was used to generate dummy data, given a specific value for B.  This data consisted of azimuthal angles and polarisation states.
 %%%%Polarisation of what???
 \newline
-In this case, each point in the prior was described by eight normalised values randomly generated from a Gaussian distributed over the surface of an 8-sphere, in a similar manner as described in Section 3. %Spin observable section.
+In this case, each point in the prior was described by eight normalised values randomly generated from a Gaussian distributed over the surface of an 8-sphere, in a similar manner as described in Section 2.1. %Spin observable section.
 These values were then combined to form four complex transversity amplitudes, which were used to calculate a value of B based on the expression in Table I.  The likelihood associated with each calculated value of B was determined by the equations below.
 \begin{equation}
  \tilde{A} = \frac{P_{\gamma}B\cos2\phi + \delta L}{1 + P_{\gamma}B\cos2\phi \delta L}
