@@ -324,12 +324,25 @@ It was possible to add some complexity to the simple observable extraction progr
 \begin{figure}[!h]
  \begin{center}
   \includegraphics[scale=1]{staircase.eps}
-  \caption{Cumulant staircase, }
+  \caption{Cumulant staircase, describing the extraction of four equally weighted points from an unequally weighted posterior consisting of 8 points.\cite{sivia}}
  \end{center}
 \end{figure}
 
+The following equation was used to create equally weighted samples.  
+\begin{equation}
+ S_{k} = u + \nu \sum_{j=1}^{k} w_{j}
+\end{equation}
+where $S_{k}$ is the height of stair \textit{k}, $u$ is a random number generated from a distribution uniform on (0,1), $\nu$ is the number of equally weighted samples required and $w_{j}$ are the weights of the samples in the posterior.
+\newline
+Whenever this $S_{k}$ just exceeded an integer, the current point in the posterior was added to the new prior distribution.  
+
+In this method, $\nu$ samples were drawn from the posterior.  A limit was applied to the number of samples that could be withdrawn in order to prevent repetition.
+\begin{equation}
+ \nu \leq \frac{1}{max_{k} w_{k}}
+\end{equation}
 
 %Describe method and equation.
+This updated (or evolving) prior has provided promising results, although tests on this section of the program are still ongoing.
 
 \section{Analysis Program}
 \subsection{SCons}
@@ -368,10 +381,6 @@ where fNest is the number of iterations, fNSamples is the number of samples, fH 
 %\newline
 An small, additional method was implemented called FinalCorrection().  This was intended to be an optional small correction to the calculations.  This method went through the samples, determined a log weight for each (much in the same way as in the core nested sampling algorithm - but did not require the program to find the point with the lowest log-likelihood) and calculated Log(Z) and H as normal.  The Explore() function was not called from this method as the samples were not changed.  The results were stored in the posterior as before.  
 
-%%%%% I think this next piece should be in Performance Testing.
-%\newline
-This parameter, N, determined by how much the number of iterations exceeded the product of the number of samples and the information.  As N was increased, the accuracy of the program also increased, but so did the amount of time required for computation.  For this reason, it was important to determine a value of N that allowed for the program to be sufficiently accurate but also did not require an excessive amount of time to run.  In the case of the TSimplePhysics program described above, values of approximately 2-5 were found to be effective.
-
 
 %%%%% Show termination condition plots here
 
@@ -400,11 +409,15 @@ During testing of the program, additional text files were output in order to ens
 
 
 \subsection{Performance Testing}
-Several performance tests were carried out on the program in order to determine its ability to extract the desired observables.  All tests were done using data simulated by an event generator.
-\subsubsection{Event Generator}
-%Describe event generator, briefly how it works.
+Several performance tests were carried out on the program in order to determine its ability to extract the desired observables.  All tests were done using data simulated by an event generator provided.  An input value of the spin observable, B, was set and the event generator produced data in both perpendicular and parallel polarisations.  This data was applied to the likelihood function of the program and the results were compared to the initial input values.
+\subsubsection{Termination Condition Tests}
+The termination condition suggested by Skilling \cite{skilling} contained a variable, $N$, that could essentially be used to set the desired precision of the results.  This parameter determined by how much the number of iterations exceeded the product of the number of samples and the information.  As $N$ was increased, the precision of the program also increased, as did the amount of time required for computation (see Section 6.2).  For this reason, it was important to determine a value of $N$ that allowed for the program to be sufficiently precise but also did not require an excessive amount of time to run.  In the case of the TSimplePhysics program described above, values of approximately 2-5 were found to be effective.
+
+
+
 \subsubsection{Timing Tests}
 %Describe timing tests and implications.  GPU possibility here!!
+
 
 
 \section{Conclusions}
