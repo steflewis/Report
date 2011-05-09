@@ -427,7 +427,7 @@ The amount of time required for the program to run was decided to be significant
 
 \section{Conclusions}
 Much work has been done in order to become familiar with the software and general aspects of this PhD project.  Development of a modern data analysis tool has begun successfully, with a clear path of further improvement and future use.  
-A basic nested sampling program was created based on a simple C program and applied to the extraction of the photon-beam asymmetry.  A prior based on
+
 \newpage
 
 \section{Future Work}

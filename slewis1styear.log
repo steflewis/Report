@@ -1,4 +1,4 @@
-This is pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=latex 2011.4.10)  8 MAY 2011 23:09
+This is pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=latex 2011.4.10)  9 MAY 2011 02:46
 entering extended mode
  %&-line parsing enabled.
 **slewis1styear.tex
@@ -281,16 +281,14 @@ Underfull \hbox (badness 10000) in paragraph at lines 354--356
 
  []
 
+[13]
 File: class_diagram.eps Graphic file (type eps)
-<class_diagram.eps>
-Overfull \hbox (61.03116pt too wide) in paragraph at lines 359--360
+ <class_diagram.eps>
+Overfull \hbox (55.51053pt too wide) in paragraph at lines 359--360
  [] 
  []
 
 
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[13]
 Underfull \hbox (badness 10000) in paragraph at lines 370--374
 
  []
@@ -307,4 +305,4 @@ Here is how much of TeX's memory you used:
  645 hyphenation exceptions out of 8191
  27i,10n,22p,1175b,305s stack positions out of 5000i,500n,6000p,200000b,15000s
 
-Output written on slewis1styear.dvi (18 pages, 48304 bytes).
+Output written on slewis1styear.dvi (18 pages, 49948 bytes).

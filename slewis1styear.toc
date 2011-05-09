@@ -12,7 +12,7 @@
 \contentsline {subsection}{\numberline {4.2}Structure and Coding}{13}
 \contentsline {subsection}{\numberline {4.3}Output}{15}
 \contentsline {subsection}{\numberline {4.4}Performance Testing}{16}
-\contentsline {subsubsection}{\numberline {4.4.1}Event Generator}{16}
+\contentsline {subsubsection}{\numberline {4.4.1}Termination Condition Tests}{16}
 \contentsline {subsubsection}{\numberline {4.4.2}Timing Tests}{16}
 \contentsline {section}{\numberline {5}Conclusions}{16}
 \contentsline {section}{\numberline {6}Future Work}{17}
