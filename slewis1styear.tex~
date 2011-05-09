@@ -413,14 +413,21 @@ Several performance tests were carried out on the program in order to determine 
 \subsubsection{Termination Condition Tests}
 The termination condition suggested by Skilling \cite{skilling} contained a variable, $N$, that could essentially be used to set the desired precision of the results.  This parameter determined by how much the number of iterations exceeded the product of the number of samples and the information.  As $N$ was increased, the precision of the program also increased, as did the amount of time required for computation (see Section 6.2).  For this reason, it was important to determine a value of $N$ that allowed for the program to be sufficiently precise but also did not require an excessive amount of time to run.  In the case of the TSimplePhysics program described above, values of approximately 2-5 were found to be effective.
 
-
+%%% Insert plots here.
 
 \subsubsection{Timing Tests}
 %Describe timing tests and implications.  GPU possibility here!!
+During the above tests, it was found that the program took an excessive amount of time to run with any amount of precision.  The time required was plotted against the number of iterations of the nested sampling program. 
+
+%%% insert timing plot here
+
+The amount of time required for the program to run was decided to be significantly greater than desired.  At this point, the potential use of graphics processor unit (GPU) processing was suggested.  This path is still currently being investigated.  
 
 
 
 \section{Conclusions}
+Much work has been done in order to become familiar with the software and general aspects of this PhD project.  Development of a modern data analysis tool has begun successfully, with a clear path of further improvement and future use.  
+A basic nested sampling program was created based on a simple C program and applied to the extraction of the photon-beam asymmetry.  A prior based on
 \newpage
 
 \section{Future Work}
