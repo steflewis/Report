@@ -215,7 +215,7 @@ The following diagram shows the process of nested sampling pictorially.  In this
 \begin{equation}
  L = 6x - x^{2} - 2
 \end{equation}
-The distribution of the points after each iterate of the nested sampling algorithm is shown in each line of the diagram below.
+The distribution of the points after each iterate of the nested sampling algorithm is shown in each line of Figure 4.
 
 
 \begin{figure}[!h]
@@ -232,134 +232,7 @@ The distribution of the points after each iterate of the nested sampling algorit
 %This section could just follow on naturally from the last section, include equations and any diagrams that may help.
 \newpage
 
-\section{Nested Sampling}
-\subsection{The Lighthouse Problem}
-In order to become accustomed with both programming and the concept of Nested Sampling, a toy problem from \cite{sivia} was attempted: \\ \\
-\textit{``A lighthouse is somewhere off a piece of straight coastline at a position $\alpha$ along the shore and a distance $\beta$ out at sea. It emits a series of short highly collimated flashes at random intervals and hence at random azimuths. These pulses are intercepted on the coast by photo-detectors that record only the fact that a flash has occurred, but not the angle from which it came. \textbf{N} flashes have so far been recorded at positions $x_{k}$. Where is the lighthouse?''} \cite{sivia}
-\\ \\
-
-
-
-\begin{figure}[!h]
- \begin{center}
-  \includegraphics[scale=0.75]{lighthouse.eps}
-  \caption{Diagram of Sivia's Lighthouse Problem \cite{sivia}}
- \end{center}
-\end{figure}
-
-\newpage
-The 64 values of $x_{k}$ were previously generated with the lighthouse being positioned at (1,1) and were provided by \cite{sivia}.
-
-Source code in C was provided and used to create an object-oriented program in C++.  The results of both approaches were compared and found to be equivalent, which ensured the functionality of the C++ version of the program.  The purpose of using object orientation was to ensure that the program was as generic as possible in order for it to be applied to other problems.  Several methods, however, were problem-specific.
-\newline
-     
-The prior was assumed to be uniform on x = (-2,2) and y = (0,2).  That is, arrays of x and y coordinates were filled with values randomly generated on (0,1) and mapped to the intervals (-2,2) and (0,2) respectively.  Each (x,y) point was then used to calculate a likelihood value that reflected the probability of the lighthouse being situated at those coordinates.
-\newline
-
-\begin{equation}
- LogL = \sum log(\frac{(y/\pi)}{(D[k]-x)^{2} + y^{2}})
-\end{equation}
-where D is the array of flash positions $x_{k}$ and the expression is summed from k = 0 to 63.
-
-
-%\newline 
-The nested sampling algorithm is then run using the calculated likelihood values.  During each iteration, the Explore() function was called in order to overwrite the point with the lowest likelihood with an evolved copy of another point, as discussed in Section 2.3.  In this problem, small random numbers were added to the x and y values and a new likelihood was calculated.  If this new likelihood was less than that of the 'worst' object, it was rejected and the loop was run through again, with slightly larger random numbers added.  This loop, a Markov Chain Monte Carlo algorithm, was iterated twenty times in order to obtain a slightly altered copy of a surviving point with a likelihood greater than that of the overwritten point. 
-\newline
-The size of the prior (i.e. the number of samples used initially) and the number of iterates were altered in order to obtain an idea of the optimal set-up of the program.  The results of these tests are shown below.
-
-%%%%%Insert no samples v no iterates
-
-\begin{figure}[!h]
- \begin{center}
-  \includegraphics[scale=0.5]{convergence.eps}
-  \caption{Graph denoting the relation between number of objects (points) and number of iterates.  For each number of objects, the number of iterates at which the log of the evidence and the information were found not to change (i.e. the number of iterates required for them to converge) were plotted, respectively.}
- \end{center}
-\end{figure}
-
-
-
-Once a sufficient set of initial values was found, the results of the object-oriented program were compared to those obtained from the original C program.  The following plots show the comparison.  
-
-%%%%%Insert results of both my code and Sivia's here.  Mention initial values in caption.  Also mention the position of the lighthouse (probably goes in a previous paragraph - where the data is mentioned).
-
-
-\begin{figure}[!h]
- \begin{center}
-  \includegraphics[scale=0.4]{lighthouseresults.eps}
-  \caption{The results of running both versions of the code with the same initial values are shown above.  a) The C code provided by Sivia; b) The object-oriented C++ code.}
- \end{center}
-\end{figure}
-
-It was apparent from these plots that the two versions of the code were consistent with each other.  This test was used to ensure that the object-oriented version was functional to at least the same degree as the C code provided.  This was particularly useful in becoming familiar with programming in an object-oriented language.
-
-\newpage
- 
-\subsection{Applications to Baryon Spectroscopy}
-%Describe prior, likelihood and explore functions used in program.
-
-%%%%Need to cite CLAS note.
-Once a working version of the generic object-oriented nested sampling program was achieved, it was applied to a more physics-related problem.  The first task in this physics application was to extract the value of one observable - the photon-beam asymmetry, B (defined in Table I). An event generator was used to generate dummy data, given a specific value for B.  This data consisted of azimuthal angles and polarisation states.
-%%%%Polarisation of what???
-\newline
-In this case, each point in the prior was described by eight normalised values randomly generated from a Gaussian distributed over the surface of an 8-sphere, in a similar manner as described in Section 2.1. %Spin observable section.
-These values were then combined to form four complex transversity amplitudes, which were used to calculate a value of B based on the expression in Table I.  The likelihood associated with each calculated value of B was determined by the equations below \cite{dgi}.
-\begin{equation}
- \tilde{A} = \frac{P_{\gamma}B\cos2\phi + \delta L}{1 + P_{\gamma}B\cos2\phi \delta L}
-\end{equation}
-
-
-\begin{equation}
-X = \frac{1}{2}(1 \pm \tilde{A})
-\end{equation}
-
-\begin{equation}
-logL = \sum log(X)
-\end{equation}
-where $P_{\gamma}$ is the photon polarisation number, $\delta L$ is the luminosity asymmetry and $logL$ is the natural logarithm of the likelihood.  In Eqn. 13, %Middle one!
-$\tilde{A}$ was added or subtracted based on whether the associated polarisation was perpendicular or parallel, respectively.  These values were summed for all events - that is, all angles and polarisation states.  
-\newline
-These values were then used as usual in the nested sampling algorithm.  The Explore() function added a small randomly generated number to each of the eight initial values.  The small randomly generated number was determined by a Gaussian distribution of a set width.  This width was altered after each iteration of the MCMC loop in the function.  As per the Lighthouse example described in Section 3.1, a new likelihood value was calculated and compared to that of the 'worst' point in order to ensure that the new point was at least more likely than that which had been overwritten.  The results of the program were compared to the value of B input into the event generator.
-
-%%%%%Insert results plots here.  Mention in caption number of iterates and samples.
-
-\begin{figure}[!h]
- \begin{center}
-  \includegraphics[scale=0.25]{B_3000_40000.eps}
-  \caption{Resulting value of B after running the program with 3000 samples and 40 000 iterations.}
- \end{center}
-\end{figure}
-
-
-\subsubsection{Updated Prior}
-%Describe evolved prior.  Need plots showing how prior and results evolve each time.
-%Describe algorithm, show equations.
-It was possible to add some complexity to the simple observable extraction program by using a previously generated posterior to confine the prior.  This would be particularly useful in the case where two or more measurements have been taken: in order to reduce the number of iterations required to achieve a precise result, the posterior of the initial measurement can be used to create a restricted prior.  The posterior generated by the program contained tens of thousands of points (determined by the number of iterations) with unequal weights.  It was found that these points contained in the posterior could be used to generate a more accurate prior, rather than using random numbers from a Gaussian distribution on the surface on an 8-sphere.  A ``cumulant staircase'' was used to create an equally-weighted posterior \cite{sivia}.
-%Insert diagram of cumulant staircase here.
-
-\begin{figure}[!h]
- \begin{center}
-  \includegraphics[scale=1]{staircase.eps}
-  \caption{Cumulant staircase, describing the extraction of four equally weighted points from an unequally weighted posterior consisting of 8 points \cite{sivia}.}
- \end{center}
-\end{figure}
-
-The following equation was used to create equally weighted samples.  
-\begin{equation}
- S_{k} = u + \nu \sum_{j=1}^{k} w_{j}
-\end{equation}
-where $S_{k}$ is the height of stair \textit{k}, $u$ is a random number generated from a distribution uniform on (0,1), $\nu$ is the number of equally weighted samples required and $w_{j}$ are the weights of the samples in the posterior.
-\newline
-Whenever this $S_{k}$ just exceeded an integer, the current point in the posterior was added to the new prior distribution.  
-
-In this method, $\nu$ samples were drawn from the posterior.  A limit was applied to the number of samples that could be withdrawn in order to prevent repetition.
-\begin{equation}
- \nu \leq \frac{1}{max_{k} (w_{k})}
-\end{equation}
-
-%Describe method and equation.
-This updated (or evolving) prior has provided promising results, although tests on this section of the program are still ongoing.
-
-\section{Analysis Program}
+\section{Nested Sampling Analysis Program}
 \subsection{SCons}
 In the CLAS Collaboration at Jefferson Lab, a software construction tool called SCons \cite{scons} has become increasingly popular.  It is a simple, relatively easy-to-use alternative to the more commonly used Makefile.  The nested sampling program developed in this project was compiled using this SCons program.  SCons is scripted using Python, and is thus fairly intuitive to code.  The main file, required to be named 'sconstruct', imported any required Python scripts, listed the source code files to be compiled and any compiler flags required. Several Python scripts were imported in order to compile using ROOT libraries.  This provided a straightforward alternative to the complicated standard, autoconf.
 
@@ -468,6 +341,133 @@ During the above tests, it was found that the program took an excessive amount o
 
 
 The amount of time required for the program to run was decided to be significantly greater than desired.  At this point, the potential use of graphics processor unit (GPU) processing and data parallelisation was suggested.  This path is still currently being investigated.  
+
+\section{Applications of Nested Sampling}
+\subsection{The Lighthouse Problem}
+In order to become accustomed with both programming and the concept of Nested Sampling, a toy problem from \cite{sivia} was attempted: \\ \\
+\textit{``A lighthouse is somewhere off a piece of straight coastline at a position $\alpha$ along the shore and a distance $\beta$ out at sea. It emits a series of short highly collimated flashes at random intervals and hence at random azimuths. These pulses are intercepted on the coast by photo-detectors that record only the fact that a flash has occurred, but not the angle from which it came. \textbf{N} flashes have so far been recorded at positions $x_{k}$. Where is the lighthouse?''} \cite{sivia}
+\\ \\
+
+
+
+\begin{figure}[!h]
+ \begin{center}
+  \includegraphics[scale=0.75]{lighthouse.eps}
+  \caption{Diagram of Sivia's Lighthouse Problem \cite{sivia}}
+ \end{center}
+\end{figure}
+
+%\newpage
+The 64 values of $x_{k}$ were previously generated with the lighthouse being positioned at (1,1) and were provided by \cite{sivia}.
+
+Source code in C was provided and used to create an object-oriented program in C++.  The results of both approaches were compared and found to be equivalent, which ensured the functionality of the C++ version of the program.  The purpose of using object orientation was to ensure that the program was as generic as possible in order for it to be applied to other problems.  Several methods, however, were problem-specific.
+\newline
+     
+The prior was assumed to be uniform on x = (-2,2) and y = (0,2).  That is, arrays of x and y coordinates were filled with values randomly generated on (0,1) and mapped to the intervals (-2,2) and (0,2) respectively.  Each (x,y) point was then used to calculate a likelihood value that reflected the probability of the lighthouse being situated at those coordinates.
+\newline
+
+\begin{equation}
+ LogL = \sum log(\frac{(y/\pi)}{(D[k]-x)^{2} + y^{2}})
+\end{equation}
+where D is the array of flash positions $x_{k}$ and the expression is summed from k = 0 to 63.
+
+
+%\newline 
+The nested sampling algorithm is then run using the calculated likelihood values.  During each iteration, the Explore() function was called in order to overwrite the point with the lowest likelihood with an evolved copy of another point, as discussed in Section 2.3.  In this problem, small random numbers were added to the x and y values and a new likelihood was calculated.  If this new likelihood was less than that of the 'worst' object, it was rejected and the loop was run through again, with slightly larger random numbers added.  This loop, a Markov Chain Monte Carlo algorithm, was iterated twenty times in order to obtain a slightly altered copy of a surviving point with a likelihood greater than that of the overwritten point. 
+\newline
+The size of the prior (i.e. the number of samples used initially) and the number of iterates were altered in order to obtain an idea of the optimal set-up of the program.  The results of these tests are shown below.
+
+%%%%%Insert no samples v no iterates
+
+\begin{figure}[!h]
+ \begin{center}
+  \includegraphics[scale=0.5]{convergence.eps}
+  \caption{Graph denoting the relation between number of objects (points) and number of iterates.  For each number of objects, the number of iterates at which the log of the evidence and the information were found not to change (i.e. the number of iterates required for them to converge) were plotted, respectively.}
+ \end{center}
+\end{figure}
+
+
+
+Once a sufficient set of initial values was found, the results of the object-oriented program were compared to those obtained from the original C program.  The following plots show the comparison.  
+
+%%%%%Insert results of both my code and Sivia's here.  Mention initial values in caption.  Also mention the position of the lighthouse (probably goes in a previous paragraph - where the data is mentioned).
+
+
+\begin{figure}[!h]
+ \begin{center}
+  \includegraphics[scale=0.4]{lighthouseresults.eps}
+  \caption{The results of running both versions of the code with the same initial values are shown above.  a) The C code provided by Sivia; b) The object-oriented C++ code.}
+ \end{center}
+\end{figure}
+
+It was apparent from these plots that the two versions of the code were consistent with each other.  This test was used to ensure that the object-oriented version was functional to at least the same degree as the C code provided.  This was particularly useful in becoming familiar with programming in an object-oriented language.
+
+\newpage
+ 
+\subsection{Baryon Spectroscopy}
+%Describe prior, likelihood and explore functions used in program.
+
+%%%%Need to cite CLAS note.
+Once a working version of the generic object-oriented nested sampling program was achieved, it was applied to a more physics-related problem.  The first task in this physics application was to extract the value of one observable - the photon-beam asymmetry, B (defined in Table I). An event generator was used to generate dummy data, given a specific value for B.  This data consisted of azimuthal angles and polarisation states.
+%%%%Polarisation of what???
+\newline
+In this case, each point in the prior was described by eight normalised values randomly generated from a Gaussian distributed over the surface of an 8-sphere, in a similar manner as described in Section 2.1. %Spin observable section.
+These values were then combined to form four complex transversity amplitudes, which were used to calculate a value of B based on the expression in Table I.  The likelihood associated with each calculated value of B was determined by the equations below \cite{dgi}.
+\begin{equation}
+ \tilde{A} = \frac{P_{\gamma}B\cos2\phi + \delta L}{1 + P_{\gamma}B\cos2\phi \delta L}
+\end{equation}
+
+
+\begin{equation}
+X = \frac{1}{2}(1 \pm \tilde{A})
+\end{equation}
+
+\begin{equation}
+logL = \sum log(X)
+\end{equation}
+where $P_{\gamma}$ is the photon polarisation number, $\delta L$ is the luminosity asymmetry and $logL$ is the natural logarithm of the likelihood.  In Eqn. 13, %Middle one!
+$\tilde{A}$ was added or subtracted based on whether the associated polarisation was perpendicular or parallel, respectively.  These values were summed for all events - that is, all angles and polarisation states.  
+\newline
+These values were then used as usual in the nested sampling algorithm.  The Explore() function added a small randomly generated number to each of the eight initial values.  The small randomly generated number was determined by a Gaussian distribution of a set width.  This width was altered after each iteration of the MCMC loop in the function.  As per the Lighthouse example described in Section 3.1, a new likelihood value was calculated and compared to that of the 'worst' point in order to ensure that the new point was at least more likely than that which had been overwritten.  The results of the program were compared to the value of B input into the event generator.
+
+%%%%%Insert results plots here.  Mention in caption number of iterates and samples.
+
+\begin{figure}[!h]
+ \begin{center}
+  \includegraphics[scale=0.25]{B_3000_40000.eps}
+  \caption{Resulting value of B after running the program with 3000 samples and 40 000 iterations.}
+ \end{center}
+\end{figure}
+
+
+\subsubsection{Updated Prior}
+%Describe evolved prior.  Need plots showing how prior and results evolve each time.
+%Describe algorithm, show equations.
+It was possible to add some complexity to the simple observable extraction program by using a previously generated posterior to confine the prior.  This would be particularly useful in the case where two or more measurements have been taken: in order to reduce the number of iterations required to achieve a precise result, the posterior of the initial measurement can be used to create a restricted prior.  The posterior generated by the program contained tens of thousands of points (determined by the number of iterations) with unequal weights.  It was found that these points contained in the posterior could be used to generate a more accurate prior, rather than using random numbers from a Gaussian distribution on the surface on an 8-sphere.  A ``cumulant staircase'' was used to create an equally-weighted posterior \cite{sivia}.
+%Insert diagram of cumulant staircase here.
+
+\begin{figure}[!h]
+ \begin{center}
+  \includegraphics[scale=1]{staircase.eps}
+  \caption{Cumulant staircase, describing the extraction of four equally weighted points from an unequally weighted posterior consisting of 8 points \cite{sivia}.}
+ \end{center}
+\end{figure}
+
+The following equation was used to create equally weighted samples.  
+\begin{equation}
+ S_{k} = u + \nu \sum_{j=1}^{k} w_{j}
+\end{equation}
+where $S_{k}$ is the height of stair \textit{k}, $u$ is a random number generated from a distribution uniform on (0,1), $\nu$ is the number of equally weighted samples required and $w_{j}$ are the weights of the samples in the posterior.
+\newline
+Whenever this $S_{k}$ just exceeded an integer, the current point in the posterior was added to the new prior distribution.  
+
+In this method, $\nu$ samples were drawn from the posterior.  A limit was applied to the number of samples that could be withdrawn in order to prevent repetition.
+\begin{equation}
+ \nu \leq \frac{1}{max_{k} (w_{k})}
+\end{equation}
+
+%Describe method and equation.
+This updated (or evolving) prior has provided promising results, although tests on this section of the program are still ongoing.
 
 \newpage
 

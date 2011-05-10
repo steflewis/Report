@@ -153,9 +153,9 @@ The significance of these thirteen triples is still being explored.
 \subsection{N* and CLAS at Jefferson Lab}
 The CEBAF Large Acceptance Spectrometer (CLAS) Collaboration is based in Hall B of the Thomas Jefferson National Accelerator Facility (Jefferson Lab).  The CLAS detector has been used in many experiments.  Particularly relevant to this work is the N* (excited nucleon) program at CLAS \cite{clas}.  These highly excited nucleon states are used to gain a better understanding of quantum chromodynamics (QCD) as they are particularly sensitive to quark confinement \cite{nstar}.
 
-The N* program encompasses a wide range of reactions, including several pseudoscalar meson photoproduction reactions, that are investigated to determine the quark structure of nucleons.  The specific reaction used in this work is described by the following equation:
+The N* program encompasses a wide range of reactions, including several pseudoscalar meson photoproduction reactions, that are investigated to determine the quark structure of nucleons.  The specific reactions studied in this work can be described by the following equation:
 \begin{equation}
- \gamma p \rightarrow \pi^{+} \pi^{-} p
+ \gamma p \rightarrow K^{+} \pi^{-} p
 \end{equation}
 A high energy photon beam is incident on a stationary proton target.  The resulting pi mesons and the scattered proton hit the detector, which records values such as energy, position along detector and timing.  This information is then used to calculate more useful physical quantities, including mass, momentum and angular momentum distributions \cite{nstar}.  
 \newline
@@ -199,7 +199,7 @@ and
  dX = \pi(\theta)d\theta
 \end{equation}
 
-The prior is a distribution, or set of points that act as an initial starting point, an estimation or expectation of the results.  Each point has an associated likelihood determined by a likelihood function.  This is usually dependent on the applicable data.  If, for example, in an effort to determine the x-coordinate of an object, the prior would consist of a set of possible x-coordinates.  The likelihood associated with each point describes how likely that point is the x-coordinate of the object.
+The prior is a distribution, or set of points that act as an initial starting point, an estimation or expectation of the results.  Each point has an associated likelihood determined by a likelihood function.  This is usually dependent on the applicable data.  For example, in an effort to determine the x-coordinate of an object, the prior would consist of a set of possible x-coordinates.  The likelihood associated with each point describes how likely that point is to be the x-coordinate of the object.
 \newline
 The output of a Bayesian calculation contains two pieces. The evidence, $Z$, is useful in comparing model assumptions.  Bayes factors, or ratios of evidence, are used to compare any two models at any time without the need to recalculate anything \cite{skilling}. The posterior is the distribution of points that result from the calculation.  These posterior points are determined primarily by the prior and likelihood.
 \newline
@@ -207,7 +207,7 @@ Nested sampling is unique in that it extracts both parts of the Bayesian output.
 \begin{equation}
  H = \int log(\frac{dP}{dX})dP
 \end{equation}
-where $dP$ is the posterior.  The values associated with the point - the point itself, its likelihood and its weight are all stored in the posterior.  The worst object is then overwritten with a copy of a 'surviving' point (any point other than the worst).  This copy is then slightly altered, usually by adding a small randomly generated number.  The likelihood of this 'new' point is then calculated and compared to that of the 'worst' object.  If it is found to be lower than the previously determined lowest likelihood, the new point is altered again.  This process uses an MCMC to ensure that the resulting new point is only a slight change from a surviving point, and that its likelihood is at least higher than that of the overwritten 'worst' object.
+where $dP$ is the posterior.  The values associated with the point - the point itself, its likelihood and its weight are all stored in the posterior.  The worst object is then overwritten with a copy of a 'surviving' point (any point other than the worst).  This copy is then slightly altered, usually by adding a small randomly generated number.  The likelihood of this 'new' point is then calculated and compared to that of the 'worst' object.  If it is found to be lower than the previously determined lowest likelihood, the new point is altered again.  This process uses a Markov Chain Monte Carlo (MCMC) to ensure that the resulting new point is only a slight change from a surviving point, and that its likelihood is at least higher than that of the overwritten 'worst' object.
 \newline
 This process is iterated through for either a predetermined number of iterates or until some termination condition is met \cite{skilling,sivia}.
 \newline
@@ -316,7 +316,7 @@ X = \frac{1}{2}(1 \pm \tilde{A})
 logL = \sum log(X)
 \end{equation}
 where $P_{\gamma}$ is the photon polarisation number, $\delta L$ is the luminosity asymmetry and $logL$ is the natural logarithm of the likelihood.  In Eqn. 13, %Middle one!
-$\tilde{A}$ was added or subtracted based on whether the associated polarisation perpendicular or parallel, respectively.  These values were summed for all events - that is, all angles and polarisation states.  
+$\tilde{A}$ was added or subtracted based on whether the associated polarisation was perpendicular or parallel, respectively.  These values were summed for all events - that is, all angles and polarisation states.  
 \newline
 These values were then used as usual in the nested sampling algorithm.  The Explore() function added a small randomly generated number to each of the eight initial values.  The small randomly generated number was determined by a Gaussian distribution of a set width.  This width was altered after each iteration of the MCMC loop in the function.  As per the Lighthouse example described in Section 3.1, a new likelihood value was calculated and compared to that of the 'worst' point in order to ensure that the new point was at least more likely than that which had been overwritten.  The results of the program were compared to the value of B input into the event generator.
 
@@ -333,7 +333,7 @@ These values were then used as usual in the nested sampling algorithm.  The Expl
 \subsubsection{Updated Prior}
 %Describe evolved prior.  Need plots showing how prior and results evolve each time.
 %Describe algorithm, show equations.
-It was possible to add some complexity to the simple observable extraction program by using a previously generated posterior to confine the prior.  The posterior generated by the program contained tens of thousands of points (determined by the number of iterations) with unequal weights.  It was found that these points contained in the posterior could be used to generate a more accurate prior, rather than using random numbers from a Gaussian distribution on the surface on an 8-sphere.  A ``cumulant staircase'' was used to create an equally-weighted posterior \cite{sivia}.
+It was possible to add some complexity to the simple observable extraction program by using a previously generated posterior to confine the prior.  This would be particularly useful in the case where two or more measurements have been taken: in order to reduce the number of iterations required to achieve a precise result, the posterior of the initial measurement can be used to create a restricted prior.  The posterior generated by the program contained tens of thousands of points (determined by the number of iterations) with unequal weights.  It was found that these points contained in the posterior could be used to generate a more accurate prior, rather than using random numbers from a Gaussian distribution on the surface on an 8-sphere.  A ``cumulant staircase'' was used to create an equally-weighted posterior \cite{sivia}.
 %Insert diagram of cumulant staircase here.
 
 \begin{figure}[!h]
@@ -353,7 +353,7 @@ Whenever this $S_{k}$ just exceeded an integer, the current point in the posteri
 
 In this method, $\nu$ samples were drawn from the posterior.  A limit was applied to the number of samples that could be withdrawn in order to prevent repetition.
 \begin{equation}
- \nu \leq \frac{1}{max_{k} w_{k}}
+ \nu \leq \frac{1}{max_{k} (w_{k})}
 \end{equation}
 
 %Describe method and equation.
@@ -472,7 +472,7 @@ The amount of time required for the program to run was decided to be significant
 \newpage
 
 \section{Summary}
-Over the past seven months, there has been much work done in order to become familiar with the theory and the software used in the field. Nested sampling proved to be a significant portion of this work.  Initially, a two problem was examined in which the location of a lighthouse was determined based on the positions of flashes along a coastline.  The source code for this example was provided in C.  The code was then adapted to C++ to allow for an object-oriented approach to be taken.  This object-orientation resulted in a nested sampling program that could be applied to many problems relatively simply.  Various tests were performed on the program to determine its accuracy to known results and to explore the effects of changing the initial parameters. Several ROOT macros were created for the generation of output plots.  Once it was shown that the program was functioning reasonably, the nested sampling program was applied to a simplified pseudoscalar meson photoproduction analysis in which the photon-beam asymmetry ($B$) was extracted.  A suitable prior and likelihood function were determined based on information found in literature.  An event generator was provided in which an initial value of $B$ was chosen and sample data was created.  This data was then applied to the program and the results produced were compared to the values input into the event generator.  The number of iterations of the nested sampling algorithm required for sufficiently accurate and precise results was determined and a termination condition was explored.  Through these performance tests, it was found that the program required significantly more time to run than anticipated.  Even after attempts to optimise the code, the amount of time for the program to run was excessive.  This became a notable setback.  Potential solutions to this problem are still being explored, in particular the use of GPU (graphics processor unit) processing and data parallelisation.  Concurrently, attempts were made to create an updated prior.  In this situation, a new, non-random equally weighted prior was determined from an unequally weighted posterior created from a previous run of the program.  The effectiveness of this updated (or evolving) prior is still being determined.
+Over the past seven months, there has been much work done in order to become familiar with the theory and the software used in the field. Nested sampling proved to be a significant portion of this work.  Initially, a toy problem was examined in which the location of a lighthouse was determined based on the positions of flashes along a coastline.  The source code for this example was provided in C.  The code was then adapted to C++ to allow for an object-oriented approach to be taken.  This object-orientation resulted in a nested sampling program that could be applied to many problems relatively simply.  Various tests were performed on the program to determine its accuracy to known results and to explore the effects of changing the initial parameters. Several ROOT macros were created for the generation of output plots.  Once it was shown that the program was functioning reasonably, the nested sampling program was applied to a simplified pseudoscalar meson photoproduction analysis in which the photon-beam asymmetry ($B$) was extracted.  A suitable prior and likelihood function were determined based on information found in literature.  An event generator was provided in which an initial value of $B$ was chosen and sample data was created.  This data was then applied to the program and the results produced were compared to the values input into the event generator.  The number of iterations of the nested sampling algorithm required for sufficiently accurate and precise results was determined and a termination condition was explored.  Through these performance tests, it was found that the program required significantly more time to run than anticipated.  Even after attempts to optimise the code, the amount of time for the program to run was excessive.  This became a notable setback.  Potential solutions to this problem are still being explored, in particular the use of GPU (graphics processor unit) processing and data parallelisation.  Concurrently, attempts were made to create an updated prior.  In this situation, a new, non-random equally weighted prior was determined from an unequally weighted posterior created from a previous run of the program.  The effectiveness of this updated (or evolving) prior is still being determined.
 \newline
 An introduction to the CLAS Collaboration also contributed to the work done during this first year.  Basic training was performed at Jefferson Lab in Newport News, Virginia.  Simple tasks were undertaken to become familiar with various aspects of data analysis at the lab.  These included a brief introduction to ROOTBEER and learning how to retrieve raw and cooked data from tape silos.  
 
@@ -492,18 +492,18 @@ There will also be some involvement in the g14 (HDice) experiment at CLAS at Jef
 
 \begin{thebibliography}{99}
 %biblio
-\bibitem{nstar} I. Aznauryan, V. Burkert, T.-S. Lee, V. Mokeeve, arXiv:1102.0597v3 [nucl-ex], February 2011
+\bibitem{nstar} I. Aznauryan, V. Burkert, T.-S. Lee, V. Mokeev, arXiv:1102.0597v3 [nucl-ex], February 2011
 \bibitem{klempt} E. Klempt, J.-M. Richard, Rev. Mod. Phys. 82, 1095-1153 (2010)
 \bibitem{sivia} D. Sivia and J. Skilling, \textit{Data Analysis - A Bayesian Tutorial.} 2nd ed. Oxford Science Publications (2006)
 \bibitem{info} D. G. Ireland, Phys. Rev. C 82, 025204 (2010)
 \bibitem{spin} X. Artru, J.-M. Richard, J. Soffer, Phys. Rev. C 75, 024002 (2007)
 \bibitem{clas} V. D. Burkert, Nucl. Phys. A 684, 16-25 (2001)
-\bibitem{rootbeer} K. Livingston, University of Glasgow Nuclear Physics Group, 2004. \textit{ROOTBEER}. [online] Available at: <http://nuclear.gla.ac.uk/~kl/rootbeer/index.php> [Accessed 28 April 2011]
+\bibitem{rootbeer} K. Livingston, University of Glasgow Nuclear Physics Group, 2004. \textit{ROOTBEER}. [online] Available at: \textless http://nuclear.gla.ac.uk/~kl/rootbeer/index.php \textgreater [Accessed 28 April 2011]
 \bibitem{bayes} D. J. Bartholomew, Biometrika 52 (1-2), 19 (1965)
 \bibitem{skilling} J. Skilling, Bayesian Analysis 1 4, 833 (2006)
 %\bibitem{bayes} D. J. Bartholomew: A Comparison of Some Bayesian and Frequentist Inferences. Biometrika Issue 4 833-860, 2006
 \bibitem{dgi} D. G. Ireland, Internal notes.
-\bibitem{scons} The SCons Foundation, 2004. \textit{SCons: A Software Construction Tool.} [online] Available at: <http://www.scons.org> [Accessed 20 January 2011]
+\bibitem{scons} The SCons Foundation, 2004. \textit{SCons: A Software Construction Tool.} [online] Available at: \textless http://www.scons.org \textgreater [Accessed 20 January 2011]
 \end{thebibliography}
 
 \end{document}          
