@@ -1,18 +1,18 @@
 \contentsline {section}{\numberline {1}Introduction}{3}
 \contentsline {section}{\numberline {2}Background}{3}
 \contentsline {subsection}{\numberline {2.1}Baryon Spectroscopy and Spin Observables}{3}
-\contentsline {subsection}{\numberline {2.2}N* and CLAS at Jefferson Lab}{5}
-\contentsline {subsection}{\numberline {2.3}Nested Sampling}{7}
-\contentsline {section}{\numberline {3}Nested Sampling}{8}
-\contentsline {subsection}{\numberline {3.1}The Lighthouse Problem}{8}
-\contentsline {subsection}{\numberline {3.2}Applications to Baryon Spectroscopy}{10}
-\contentsline {subsubsection}{\numberline {3.2.1}Evolved Prior}{12}
-\contentsline {section}{\numberline {4}Analysis Program}{13}
-\contentsline {subsection}{\numberline {4.1}SCons}{13}
-\contentsline {subsection}{\numberline {4.2}Structure and Coding}{13}
-\contentsline {subsection}{\numberline {4.3}Output}{15}
-\contentsline {subsection}{\numberline {4.4}Performance Testing}{16}
-\contentsline {subsubsection}{\numberline {4.4.1}Termination Condition Tests}{16}
-\contentsline {subsubsection}{\numberline {4.4.2}Timing Tests}{16}
-\contentsline {section}{\numberline {5}Conclusions}{16}
-\contentsline {section}{\numberline {6}Future Work}{17}
+\contentsline {subsection}{\numberline {2.2}N* and CLAS at Jefferson Lab}{7}
+\contentsline {subsection}{\numberline {2.3}Nested Sampling}{8}
+\contentsline {section}{\numberline {3}Nested Sampling}{10}
+\contentsline {subsection}{\numberline {3.1}The Lighthouse Problem}{10}
+\contentsline {subsection}{\numberline {3.2}Applications to Baryon Spectroscopy}{13}
+\contentsline {subsubsection}{\numberline {3.2.1}Updated Prior}{14}
+\contentsline {section}{\numberline {4}Analysis Program}{15}
+\contentsline {subsection}{\numberline {4.1}SCons}{15}
+\contentsline {subsection}{\numberline {4.2}Structure and Coding}{16}
+\contentsline {subsection}{\numberline {4.3}Output}{17}
+\contentsline {subsection}{\numberline {4.4}Performance Testing}{18}
+\contentsline {subsubsection}{\numberline {4.4.1}Termination Condition Tests}{18}
+\contentsline {subsubsection}{\numberline {4.4.2}Timing Tests}{19}
+\contentsline {section}{\numberline {5}Summary}{22}
+\contentsline {section}{\numberline {6}Future Work}{23}

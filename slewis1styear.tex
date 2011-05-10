@@ -55,7 +55,7 @@
 \maketitle
 
 \begin{abstract}
-
+This PhD project focusses on the development of a modern analysis technique based on Bayesian statistics.  This analysis tool will eventually be used in the extraction of polarisation observables from data collected by the CLAS Collaboration in Hall B at Jefferson Lab, in Newport News, Virginia.  In this report, the familiarisation with various aspects of the PhD program, specifically software, will be discussed.  An introduction to the concept of nested sampling is included.  This idea of nested sampling, based on Bayesian analysis, is the basis of an alternative to maximum likelihood fitting.  The intermediary steps between a sample problem and a useful analysis tool will be discussed.  In the future, data collected from the excited nucleon (N*) program at CLAS will be analysed using this technique.  As such, a brief description of the surrounding theory is included - specifically baryon spectroscopy and pseudoscalar meson photoproduction.  The future work planned for this project is also discussed.  There is a clear plan for the further improvements and development of the nested sampling analysis tool.  There are plans to work in the future with the CLAS Collaboration on the tagger energy calibration for the g14 (HDIce) experiment in Hall B.  
 \end{abstract}
 
 \newpage
@@ -64,7 +64,8 @@
 \newpage
 
 \section{Introduction}
-This PhD project is focused on the development of analysis techniques to be used in the extraction of polarisation observables in the N* program at CLAS.  
+This PhD project is focused on the development of an analysis technique to be used in the extraction of polarisation observables in the N* program at CLAS. The results of such a tool can be used to develop a complete understanding of pseudoscalar meson photoproduction, which accesses the excited nucleon spectrum.  This would be used to find missing mass resonances, that is, mass resonances predicted by some quark models but not others.  The N* program at CLAS covers a wide spectrum of reactions which can be studied in order to gain a better understanding of the spin structure of nucleons \cite{}.  Pseudoscalar meson photoproduction reactions are of particular interest.  These reactions provide an insight to the excited nucleon spectrum.   
+\newline
 %%%%EDIT THIS
 Within the last 7 months, much time has been spent on getting accustomed to various aspects of the physics research environment.  Several new topics were explored; primarily Bayesian analysis (specifically Nested Sampling), object-oriented programming and baryon spectroscopy.  
 \newline
@@ -80,9 +81,9 @@ In addition to becoming accustomed to the computational skills, there has been s
 \section{Background}
 \subsection{Baryon Spectroscopy and Spin Observables} 
 %Baryon paper - Klempt, Richard
-Despite the physics taught in undergraduate physics courses, the quark contributions to the spin of a nucleon are not well understood.  There exist several quark models which each attempt to provide an explanation of the spin nature of nucleons.  Baryon spectroscopy is an experimental approach used to support or preclude predicted quark models.  Each quark model predicts mass resonances at various energies in the nucleon spectrum.  There are some mass resonances, however, that are expected for some quark models and not others.  Finding these resonances that are missing from some quark models would exclude those models and provide a significant insight into the spin structure of the nucleon.
+Despite the physics taught in undergraduate physics courses, the quark contributions to the spin of a nucleon are not well understood.  There exist several quark models which each attempt to provide an explanation of the spin nature of nucleons.  Baryon spectroscopy is an experimental approach used to support or preclude predicted quark models.  Each quark model predicts mass resonances at various energies in the nucleon spectrum.  There are some mass resonances, however, that are expected for some quark models and not others.  Finding these resonances that are missing from some quark models would exclude those models and provide a significant insight into the spin structure of the nucleon.\cite{nstar}
 \newline
-Pseudoscalar meson photoproduction is used to examine the spectrum of excited nucleon states.  It can be said that the entire process of pseudoscalar meson photoproduction can be completely described by four complex amplitudes.  A beam of high-energy photons is directed onto a stationary nucleon target.  Mesons and the scattered nucleon are detected at points within the detector.  From the information detected, it is possible to extract various observables that can be linked to these four complex amplitudes.  There are, in total, fifteen observables (described in Table I) that can be extracted from variations in experimental set-up.  There are three single-spin observables - a photon-beam asymmetry ($B$), a recoil polarisation ($R$) and a target polarisation ($T$).  There are four beam-recoil ($BR$), four beam-target ($BT$) and four recoil-target ($RT$) spin polarisations.  These observables are all non-independent combinations of the four complex amplitudes.  As such, it is necessary to calculate multiple observables in order to extract the amplitudes. Data from suitably arranged experiments must be used to calculate these observables. 
+Pseudoscalar meson photoproduction is used to examine the spectrum of excited nucleon states.  It can be said that the entire process of pseudoscalar meson photoproduction can be completely described by four complex amplitudes.  A beam of high-energy photons is directed onto a stationary nucleon target.  Mesons and the scattered nucleon are detected at points within the detector.  From the information detected, it is possible to extract various observables that can be linked to these four complex amplitudes.  There are, in total, fifteen observables (described in Table I) that can be extracted from variations in experimental set-up.  There are three single-spin observables - a photon-beam asymmetry ($B$), a recoil polarisation ($R$) and a target polarisation ($T$).  There are four beam-recoil ($BR$), four beam-target ($BT$) and four recoil-target ($RT$) spin polarisations.  These observables are all non-independent combinations of the four complex amplitudes.  As such, it is necessary to calculate multiple observables in order to extract the amplitudes. Data from suitably arranged experiments must be used to calculate these observables. \cite{nstar, info}
 \newline
 %%%%This is from the Spin Observables section (which used to exist).  ABOVE HERE need to explain physics.
 In order to become accustomed with the correlations and behaviour of spin observables, a small standalone program was created.  The aim of this macro was to generate dummy variables used to calculate the sixteen spin observables and output plots showing correlations between various observables.
@@ -118,12 +119,12 @@ Eight values were randomly generated from a Gaussian distribution over the surfa
   \end{table}
   \end{center}
   %Insert table from Ireland's 
-
+\newpage
 Histograms were generated such that each observable was plotted against each other observable in order to determine any correlations between them.  
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
  \begin{center}
-  \includegraphics[scale=0.5]{histograms2D.eps}
+  \includegraphics[scale=0.4]{histograms2D.eps}
   \caption{Observables were plotted against each other to show relationships between sets of observables.}
  \end{center}
 \end{figure}
@@ -132,35 +133,41 @@ Plots showing circular patterns indicated that the two observables present in th
 
 \begin{figure}[!h]
  \begin{center}
-  \includegraphics[scale=0.3]{RFG.eps}
+  \includegraphics[scale=0.25]{RFG.eps}
   \caption{Tetrahedron resulting from plotting R, F and G in three dimensions.}
  \end{center}
 \end{figure}
 
-The equations defining the thirteen tetrahedra are shown below.
+The equations defining the thirteen tetrahedra are shown in Figure 3.
 
-
-\begin{figure}[!h]
+\newpage
+\begin{figure}[!ht]
  \begin{center}
-  \includegraphics[scale=0.75]{ineqs.eps}
+  \includegraphics[scale=0.7]{ineqs.eps}
   \caption{The thirteen tetrahedral correlations correspond to the following triples: $REH, RFG, BT_{x}L_{z}, BT_{z}L_{x}, BTR, EC_{x}L_{x}, EC_{z}L_{z}, TC_{z}O_{x}, TC_{x}O_{z}, FC_{x}T_{x}, FC_{z}T_{z}, GO_{x}L_{x}$ and $GO_{z}L_{z}$.}
  \end{center}
 \end{figure}
 
 The significance of these thirteen triples is still being explored.
-
+\newpage
 \subsection{N* and CLAS at Jefferson Lab}
-The CEBAF Large Acceptance Spectrometer (CLAS) Collaboration is based in Hall B of the Thomas Jefferson National Accelerator Facility (Jefferson Lab).  The CLAS detector has been used in many experiments.  Particularly relevant to this work is the N* (excited nucleon) program at CLAS.  This program uses pseudoscalar meson photoproduction in order to explore the quark structure of nucleons.  The specific reaction used in this work is described by the following equation:
+The CEBAF Large Acceptance Spectrometer (CLAS) Collaboration is based in Hall B of the Thomas Jefferson National Accelerator Facility (Jefferson Lab).  The CLAS detector has been used in many experiments.  Particularly relevant to this work is the N* (excited nucleon) program at CLAS.  These highly excited nucleon states are used to gain a better understanding of quantum chromodynamics (QCD) as they are particularly sensitive to quark confinement. \cite{nstar}
+
+The N* program encompasses a wide range of reactions, including several pseudoscalar meson photoproduction reactions, that are investigated to determine the quark structure of nucleons.  The specific reaction used in this work is described by the following equation:
 \begin{equation}
  \gamma p \rightarrow \pi^{+} \pi^{-} p
 \end{equation}
-A high energy photon beam is incident on a stationary proton target.  The resulting pi mesons and the scattered proton hit the detector, which records values such as energy, position along detector and timing.  This information is then used to calculate more useful physical quantities, including mass, momentum and angular momentum distributions.  
+A high energy photon beam is incident on a stationary proton target.  The resulting pi mesons and the scattered proton hit the detector, which records values such as energy, position along detector and timing.  This information is then used to calculate more useful physical quantities, including mass, momentum and angular momentum distributions.\cite{nstar}  
+\newline
+The CLAS detector produces data in a raw form.  This data is then 'cooked' in order to present it in a useful format with the required data values.  A software package known as ROOTBEER, developed by Ken Livingston in Glasgow, is used to access information from these cooked data files \cite{rootbeer}.  This is a ROOT-based tool of bank event extraction routines.  
+\newline
+In the near future, CLAS will be undergoing a significant upgrade to CLAS12, where a higher energy beam (12 GeV from 6 GeV) will be installed.  This will enable the access of a large amount of data in regions where few experiments and collaborations are capable of exploring.  
 
 \subsection{Nested Sampling}
 %Sivia, Skilling
 Nested sampling is a modern model comparison technique based on the principles of Bayesian statistics.  Most conventional analysis tools rely on the more widely known frequentist approach. In this approach, data is collected, and values such as the mean and standard deviation are extracted.  Any inferences are then based on the distribution of these statistics.  As such, the results are only based on a probability, and are not themselves probability statements.  The frequentist approach does not involve any knowledge or expectation of the results, and this is the key difference between frequentist and Bayesian statistics. \cite{bayes}
 \newline
-Bayesian statistics involves making an estimation of the results prior to any calculations.  This 'guess' is used to form a distribution with a easily determined mean and variance, known as the 'Prior'.  Bayes' Theorem (Eqn 1) is then used to combine the prior distribution with the data and produce a posterior distribution, the statistics of which determine the resulting mean, variance, etc. \cite{sivia} 
+Bayesian statistics involves making an estimation of the results prior to any calculations.  This 'guess' is used to form a distribution with a easily determined mean and variance, known as the 'Prior'.  Bayes' Theorem (Eqn 2) is then used to combine the prior distribution with the data and produce a posterior distribution, the statistics of which determine the resulting mean, variance, etc. \cite{sivia} 
 \newline
 
 \begin{equation}
@@ -223,7 +230,7 @@ The distribution of the points after each iterate of the nested sampling algorit
 %Important to clearly explain all terms such as Prior, Posterior, Evidence, etc.
 
 %This section could just follow on naturally from the last section, include equations and any diagrams that may help.
-
+\newpage
 
 \section{Nested Sampling}
 \subsection{The Lighthouse Problem}
@@ -240,7 +247,7 @@ In order to become accustomed with both programming and the concept of Nested Sa
  \end{center}
 \end{figure}
 
-
+\newpage
 The 64 values of $x_{k}$ were previously generated with the lighthouse being positioned at (1,1) and were provided by \cite{sivia}.
 
 Source code in C was provided and used to create an object-oriented program in C++.  The results of both approaches were compared and found to be equivalent, which ensured the functionality of the C++ version of the program.  The purpose of using object orientation was to ensure that the program was as generic as possible in order for it to be applied to other problems.  Several methods, however, were problem-specific.
@@ -256,7 +263,7 @@ where D is the array of flash positions $x_{k}$ and the expression is summed fro
 
 
 %\newline 
-The nested sampling algorithm is then run using the calculated likelihood values.  During each iteration, the Explore() function was called in order to overwrite the point with the lowest likelihood with an evolved copy of another point, as discussed in Section 2.2.  In this problem, small random numbers were added to the x and y values and a new likelihood was calculated.  If this new likelihood was less than that of the 'worst' object, it was rejected and the loop was run through again, with slightly larger random numbers added.  This loop, a Markov Chain Monte Carlo algorithm, was iterated twenty times in order to obtain a slightly altered copy of a surviving point with a likelihood greater than that of the overwritten point. 
+The nested sampling algorithm is then run using the calculated likelihood values.  During each iteration, the Explore() function was called in order to overwrite the point with the lowest likelihood with an evolved copy of another point, as discussed in Section 2.3.  In this problem, small random numbers were added to the x and y values and a new likelihood was calculated.  If this new likelihood was less than that of the 'worst' object, it was rejected and the loop was run through again, with slightly larger random numbers added.  This loop, a Markov Chain Monte Carlo algorithm, was iterated twenty times in order to obtain a slightly altered copy of a surviving point with a likelihood greater than that of the overwritten point. 
 \newline
 The size of the prior (i.e. the number of samples used initially) and the number of iterates were altered in order to obtain an idea of the optimal set-up of the program.  The results of these tests are shown below.
 
@@ -285,7 +292,7 @@ Once a sufficient set of initial values was found, the results of the object-ori
 
 It was apparent from these plots that the two versions of the code were consistent with each other.  This test was used to ensure that the object-oriented version was functional to at least the same degree as the C code provided.  This was particularly useful in becoming familiar with programming in an object-oriented language.
 
-
+\newpage
  
 \subsection{Applications to Baryon Spectroscopy}
 %Describe prior, likelihood and explore functions used in program.
@@ -295,7 +302,7 @@ Once a working version of the generic object-oriented nested sampling program wa
 %%%%Polarisation of what???
 \newline
 In this case, each point in the prior was described by eight normalised values randomly generated from a Gaussian distributed over the surface of an 8-sphere, in a similar manner as described in Section 2.1. %Spin observable section.
-These values were then combined to form four complex transversity amplitudes, which were used to calculate a value of B based on the expression in Table I.  The likelihood associated with each calculated value of B was determined by the equations below.
+These values were then combined to form four complex transversity amplitudes, which were used to calculate a value of B based on the expression in Table I.  The likelihood associated with each calculated value of B was determined by the equations below.\cite{dgi}
 \begin{equation}
  \tilde{A} = \frac{P_{\gamma}B\cos2\phi + \delta L}{1 + P_{\gamma}B\cos2\phi \delta L}
 \end{equation}
@@ -308,14 +315,22 @@ X = \frac{1}{2}(1 \pm \tilde{A})
 \begin{equation}
 logL = \sum log(X)
 \end{equation}
-where $P_{\gamma}$ is the photon polarisation number, $\delta L$ is the luminosity asymmetry and $logL$ is the natural logarithm of the likelihood.  In Eqn. 6, %Middle one!
+where $P_{\gamma}$ is the photon polarisation number, $\delta L$ is the luminosity asymmetry and $logL$ is the natural logarithm of the likelihood.  In Eqn. 13, %Middle one!
 $\tilde{A}$ was added or subtracted based on whether the associated polarisation perpendicular or parallel, respectively.  These values were summed for all events - that is, all angles and polarisation states.  
 \newline
-These values were then used as usual in the nested sampling algorithm.  The Explore() function added a small randomly generated number to each of the eight initial values.  The small randomly generated number was determined by a Gaussian distribution of a set width.  This width was altered after each iteration of the MCMC loop in the function.  As per the Lighthouse example described in Section \textbf{Lighthouse}, a new likelihood value was calculated and compared to that of the 'worst' point in order to ensure that the new point was at least more likely than that which had been overwritten.  The results of the program were compared to the value of B input into the event generator.
+These values were then used as usual in the nested sampling algorithm.  The Explore() function added a small randomly generated number to each of the eight initial values.  The small randomly generated number was determined by a Gaussian distribution of a set width.  This width was altered after each iteration of the MCMC loop in the function.  As per the Lighthouse example described in Section 3.1, a new likelihood value was calculated and compared to that of the 'worst' point in order to ensure that the new point was at least more likely than that which had been overwritten.  The results of the program were compared to the value of B input into the event generator.
 
 %%%%%Insert results plots here.  Mention in caption number of iterates and samples.
 
-\subsubsection{Evolved Prior}
+\begin{figure}[!h]
+ \begin{center}
+  \includegraphics[scale=0.25]{B_3000_40000.eps}
+  \caption{Resulting value of B after running the program with 3000 samples and 40 000 iterations.}
+ \end{center}
+\end{figure}
+
+
+\subsubsection{Updated Prior}
 %Describe evolved prior.  Need plots showing how prior and results evolve each time.
 %Describe algorithm, show equations.
 It was possible to add some complexity to the simple observable extraction program by using a previously generated posterior to confine the prior.  The posterior generated by the program contained tens of thousands of points (determined by the number of iterations) with unequal weights.  It was found that these points contained in the posterior could be used to generate a more accurate prior, rather than using random numbers from a Gaussian distribution on the surface on an 8-sphere.  A ``cumulant staircase'' was used to create an equally-weighted posterior\cite{sivia}.
@@ -390,7 +405,7 @@ The nested sampling program generated an output in several forms.  Basic informa
 
 \begin{figure}[!h]
  \begin{center}
-  \includegraphics[scale=1]{term_output.eps}
+  \includegraphics[scale=0.8]{term_output.eps}
   \caption{Information shown in terminal after running TSimplePhysics program.}
  \end{center}
 \end{figure}
@@ -402,7 +417,7 @@ The standard deviation uncertainty for Log(Z) was printed (as shown in Fig. 4) b
 
 
 %Maybe briefly describe the terms that are output?
-In addition to outputting to the screen, a ROOT tree (written to a .root file) was also created.  This tree was used to store many types of information in the form of branches.  The ROOT tree was used to examine the results visually.  A ROOT macro was written and used to generate several histograms showing the key results from the posterior.  Examples of these plots can be found in \textbf{SECTIONS WITH PLOTS}.
+In addition to outputting to the screen, a ROOT tree (written to a .root file) was also created.  This tree was used to store many types of information in the form of branches.  The ROOT tree was used to examine the results visually.  A ROOT macro was written and used to generate several histograms showing the key results from the posterior.  Examples of these plots can be found in Sections 3.1 and 3.2.
 
 
 During testing of the program, additional text files were output in order to ensure that various sections of the code were working as intended.  In particular, the introduction of an evolved prior required several files to be created and examined in ROOT.
@@ -411,22 +426,55 @@ During testing of the program, additional text files were output in order to ens
 \subsection{Performance Testing}
 Several performance tests were carried out on the program in order to determine its ability to extract the desired observables.  All tests were done using data simulated by an event generator provided.  An input value of the spin observable, B, was set and the event generator produced data in both perpendicular and parallel polarisations.  This data was applied to the likelihood function of the program and the results were compared to the initial input values.
 \subsubsection{Termination Condition Tests}
-The termination condition suggested by Skilling \cite{skilling} contained a variable, $N$, that could essentially be used to set the desired precision of the results.  This parameter determined by how much the number of iterations exceeded the product of the number of samples and the information.  As $N$ was increased, the precision of the program also increased, as did the amount of time required for computation (see Section 6.2).  For this reason, it was important to determine a value of $N$ that allowed for the program to be sufficiently precise but also did not require an excessive amount of time to run.  In the case of the TSimplePhysics program described above, values of approximately 2-5 were found to be effective.
+The termination condition suggested by Skilling \cite{skilling} contained a variable, $N$, that could essentially be used to set the desired precision of the results.  This parameter determined by how much the number of iterations exceeded the product of the number of samples and the information.  As $N$ was increased, the precision of the program also increased, as did the amount of time required for computation (see Section 4.3).  For this reason, it was important to determine a value of $N$ that allowed for the program to be sufficiently precise but also did not require an excessive amount of time to run.  In the case of the TSimplePhysics program described above, values of approximately 2-5 were found to be effective.
 
 %%% Insert plots here.
 
+\begin{figure}[!h]
+ \begin{center}
+  \includegraphics[scale=0.35]{logZplot.eps}
+  \caption{Plot showing the convergence of Log(Z) and the values obtained at N = 2.}
+ \end{center}
+\end{figure}
+
+
+\begin{figure}[!h]
+ \begin{center}
+  \includegraphics[scale=0.4]{Hplot.eps}
+  \caption{Plot showing the convergence of H and the values obtained at N = 2.}
+ \end{center}
+\end{figure}
+
+
+\begin{figure}[!h]
+ \begin{center}
+  \includegraphics[scale=0.4]{term_cond.eps}
+  \caption{Plot showing relation between value of N and number of iterations performed.}
+ \end{center}
+\end{figure}
+\newpage
 \subsubsection{Timing Tests}
 %Describe timing tests and implications.  GPU possibility here!!
-During the above tests, it was found that the program took an excessive amount of time to run with any amount of precision.  The time required was plotted against the number of iterations of the nested sampling program. 
+During the above tests, it was found that the program took an excessive amount of time to run with any decent amount of precision.  The time required to run the program with different number of iterations of the nested sampling algorithm was recorded and plotted against the number of iterations. 
 
 %%% insert timing plot here
 
-The amount of time required for the program to run was decided to be significantly greater than desired.  At this point, the potential use of graphics processor unit (GPU) processing was suggested.  This path is still currently being investigated.  
+\begin{figure}[!h]
+ \begin{center}
+  \includegraphics[scale=0.5]{timing.eps}
+  \caption{Time required to run program with various numbers of iterations.}
+ \end{center}
+\end{figure}
 
 
+The amount of time required for the program to run was decided to be significantly greater than desired.  At this point, the potential use of graphics processor unit (GPU) processing and data parallelisation was suggested.  This path is still currently being investigated.  
 
-\section{Conclusions}
-Much work has been done in order to become familiar with the software and general aspects of this PhD project.  Development of a modern data analysis tool has begun successfully, with a clear path of further improvement and future use.  
+\newpage
+
+\section{Summary}
+Over the past seven months, there has been much work done in order to become familiar with the theory and the software used in the field. Nested sampling proved to be a significant portion of this work.  Initially, a two problem was examined in which the location of a lighthouse was determined based on the positions of flashes along a coastline.  The source code for this example was provided in C.  The code was then adapted to C++ to allow for an object-oriented approach to be taken.  This object-orientation resulted in a nested sampling program that could be applied to many problems relatively simply.  Various tests were performed on the program to determine its accuracy to known results and to explore the effects of changing the initial parameters. Several ROOT macros were created for the generation of output plots.  Once it was shown that the program was functioning reasonably, the nested sampling program was applied to a simplified pseudoscalar meson photoproduction analysis in which the photon-beam asymmetry ($B$) was extracted.  A suitable prior and likelihood function were determined based on information found in literature.  An event generator was provided in which an initial value of $B$ was chosen and sample data was created.  This data was then applied to the program and the results produced were compared to the values input into the event generator.  The number of iterations of the nested sampling algorithm required for sufficiently accurate and precise results was determined and a termination condition was explored.  Through these performance tests, it was found that the program required significantly more time to run than anticipated.  Even after attempts to optimise the code, the amount of time for the program to run was excessive.  This became a notable setback.  Potential solutions to this problem are still being explored, in particular the use of GPU (graphics processor unit) processing and data parallelisation.  Concurrently, attempts were made to create an updated prior.  In this situation, a new, non-random equally weighted prior was determined from an unequally weighted posterior created from a previous run of the program.  The effectiveness of this updated (or evolving) prior is still being determined.
+\newline
+An introduction to the CLAS Collaboration also contributed to the work done during this first year.  Basic training was performed at Jefferson Lab in Newport News, Virginia.  Simple tasks were undertaken to become familiar with various aspects of data analysis at the lab.  These included a brief introduction to ROOTBEER and learning how to retrieve raw and cooked data from tape silos.  
 
 \newpage
 
@@ -437,19 +485,21 @@ The first step in this development is to handle all observables.  Instead of sim
 
 Once this improvement has been implemented, it will be tested with data from experiment that has previously been studied.  The results will be compared to those obtained from a maximum-likelihood analysis program in order to ensure an acceptable level of accuracy. Once a sufficient degree of accuracy has been shown (and any necessary tweaks and adjustments have been made), the program will be used to evaluate new experimental data.
 
-One of the drawbacks of this nested sampling approach is the excessive run-time required to obtain good results.  As discussed previously, this poses a significant problem.  The amount of time required to run the program using a sufficient number of iterations is longer than desired, despite optimisations.  The possibility of applying programming techniques used in graphics card programming and graphics processing unit (GPU) programming, in particular data parallelisation, will be strongly considered.  If successful, this would dramatically reduce the amount of time required to run the program with a high number of iterations. The implications of this improvement could enable the program to handle exceptionally large data sets in just minutes, making it a desirable alternative to maximum likelihood methods.
+One of the drawbacks of this nested sampling approach is the excessive run-time required to obtain good results.  As discussed previously, this poses a significant problem.  The amount of time required to run the program using a sufficient number of iterations is longer than desired, despite optimisations.  The possibility of applying programming techniques used in graphics card programming and graphics processing unit (GPU) programming, in particular data parallelisation, will be strongly considered.  If successful, this would dramatically reduce the amount of time required to run the program with a high number of iterations. The implications of this improvement could enable the program to handle exceptionally large data sets in just minutes, making it a more desirable alternative to maximum likelihood methods.
 
-There will also be some involvement in the g14 (HDice) experiment at CLAS at Jefferson Lab. Any discrepancies in the tagger required to determine the photon energy will need to be found and calibrated.  This will involve using ROOTBEER, a program developed by Ken Livingston.  In order to perform this task, some time will also be spent becoming familiar with the software and various aspects of acquiring data files from the CLAS tape silos and farms. 
+There will also be some involvement in the g14 (HDice) experiment at CLAS at Jefferson Lab. This project would be specific to the tagger energy calibration.  Any discrepancies in the tagger required to determine the photon energy must be found and calibrated to produce meaningful data.  This will involve using ROOTBEER, a ROOT-based program developed by Ken Livingston.  In order to perform this task, some time will also be spent becoming familiar with the software and various aspects of acquiring data files from the CLAS tape silos and farms. 
 
 
 \begin{thebibliography}{99}
 %biblio
-
-\bibitem{skilling} J. Skilling, Bayesian Analysis 1 4, 833 (2006)
-\bibitem{sivia} D. Sivia and J. Skilling, \textit{Data Analysis - A Bayesian Tutorial.} 2nd ed. Oxford Science Publications (2006)
-%\bibitem{bayes} D. J. Bartholomew: A Comparison of Some Bayesian and Frequentist Inferences. Biometrika Issue 4 833-860, 2006
-\bibitem{bayes} D. J. Bartholomew, Biometrika 52 (1-2), 19 (1965)
+\bibitem{nstar} I. Aznauryan, V. Burkert, T.-S. Lee, V. Mokeeve, arXiv:1102.0597v3 [nucl-ex], February 2011
 \bibitem{info} D. G. Ireland, Phys. Rev. C 82, 025204 (2010)
+\bibitem{rootbeer} K. Livingston, University of Glasgow Nuclear Physics Group, 2004. \textit{ROOTBEER}. [online] Available at: <http://nuclear.gla.ac.uk/~kl/rootbeer/index.php> [Accessed 28 April 2011]
+\bibitem{bayes} D. J. Bartholomew, Biometrika 52 (1-2), 19 (1965)
+\bibitem{sivia} D. Sivia and J. Skilling, \textit{Data Analysis - A Bayesian Tutorial.} 2nd ed. Oxford Science Publications (2006)
+\bibitem{skilling} J. Skilling, Bayesian Analysis 1 4, 833 (2006)
+%\bibitem{bayes} D. J. Bartholomew: A Comparison of Some Bayesian and Frequentist Inferences. Biometrika Issue 4 833-860, 2006
+\bibitem{dgi} D. G. Ireland, Internal notes.
 \bibitem{scons} The SCons Foundation, 2004. \textit{SCons: A Software Construction Tool.} [online] Available at: <http://www.scons.org> [Accessed 20 January 2011]
 \end{thebibliography}
 
